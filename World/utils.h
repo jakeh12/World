@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <math.h>
-//#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #define deg_to_rad(deg) (deg * M_PI / 180.0)

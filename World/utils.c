@@ -8,7 +8,7 @@ char* load_file(const char* path)
     exit(1);
   }
   fseek(file, 0, SEEK_END);
-  int length = ftell(file);
+  int length = (int)(ftell(file));
   fseek(file, 0, SEEK_SET);
   char* data = calloc(length + 1, sizeof(char));
   fread(data, 1, length, file);

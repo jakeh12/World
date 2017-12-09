@@ -59,8 +59,8 @@ int main()
     return 1;
   }
 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -77,10 +77,6 @@ int main()
   glfwSetCursorPosCallback(window, cursor_position_callback);
 
   glfwMakeContextCurrent(window);
-
-  ///* start GLEW extension handler */
-  //glewExperimental = GL_TRUE;
-  //glewInit();
 
   /* object to render */
   static GLfloat g_vertex_buffer_data[] = {
@@ -166,8 +162,6 @@ int main()
 
       draw_triangles(vbo, 36);
       // **** DONE RENDER ****
-
-
 
       glfwSwapBuffers(window);
       glfwPollEvents();
