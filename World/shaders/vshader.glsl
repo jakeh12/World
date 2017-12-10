@@ -7,5 +7,5 @@ uniform mat4 mvp_matrix;
 
 void main() {
   gl_Position = mvp_matrix * vec4(position, 1.0);
-  color = vec4(position.x + 0.5, position.y + 0.5, position.z + 0.5, 1.0);
+  color = vec4(position.x*0.5 + 0.5, position.y*0.5 + 0.5, position.z*0.5 + 0.5, 1.0);
 }

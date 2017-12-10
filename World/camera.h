@@ -5,11 +5,11 @@
 #include <math.h>
 
 typedef struct {
-  float x;
-  float y;
-  float z;
-  float rx;
-  float ry;
+    float x;
+    float y;
+    float z;
+    float rx;
+    float ry;
 } camera_t;
 
 camera_t* camera_create(void);

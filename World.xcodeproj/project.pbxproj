@@ -10,7 +10,6 @@
 		675327781FDC6DBE00F9B39A /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 6753276A1FDC6DBC00F9B39A /* matrix.c */; };
 		6753277B1FDC6DBE00F9B39A /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 6753276E1FDC6DBD00F9B39A /* utils.c */; };
 		6753277C1FDC6DBE00F9B39A /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327731FDC6DBD00F9B39A /* draw.c */; };
-		6753277D1FDC6DBE00F9B39A /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327741FDC6DBE00F9B39A /* shader.c */; };
 		6753277E1FDC6DBE00F9B39A /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327761FDC6DBE00F9B39A /* camera.c */; };
 		675327811FDC6E2300F9B39A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327801FDC6E2300F9B39A /* main.c */; };
 		675327841FDC6ECA00F9B39A /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 675327831FDC6ECA00F9B39A /* libglfw.3.2.dylib */; };
@@ -31,14 +30,12 @@
 /* Begin PBXFileReference section */
 		6753274B1FDC6D8400F9B39A /* World */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = World; sourceTree = BUILT_PRODUCTS_DIR; };
 		6753276A1FDC6DBC00F9B39A /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
-		6753276D1FDC6DBD00F9B39A /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		6753276E1FDC6DBD00F9B39A /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		6753276F1FDC6DBD00F9B39A /* draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = draw.h; sourceTree = "<group>"; };
 		675327701FDC6DBD00F9B39A /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		675327711FDC6DBD00F9B39A /* vshader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vshader.glsl; sourceTree = "<group>"; };
 		675327721FDC6DBD00F9B39A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		675327731FDC6DBD00F9B39A /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = draw.c; sourceTree = "<group>"; };
-		675327741FDC6DBE00F9B39A /* shader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
 		675327751FDC6DBE00F9B39A /* fshader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fshader.glsl; sourceTree = "<group>"; };
 		675327761FDC6DBE00F9B39A /* camera.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = camera.c; sourceTree = "<group>"; };
 		675327771FDC6DBE00F9B39A /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
@@ -86,8 +83,6 @@
 				6753276F1FDC6DBD00F9B39A /* draw.h */,
 				6753276A1FDC6DBC00F9B39A /* matrix.c */,
 				675327771FDC6DBE00F9B39A /* matrix.h */,
-				675327741FDC6DBE00F9B39A /* shader.c */,
-				6753276D1FDC6DBD00F9B39A /* shader.h */,
 				6753276E1FDC6DBD00F9B39A /* utils.c */,
 				675327701FDC6DBD00F9B39A /* utils.h */,
 			);
@@ -169,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6753277B1FDC6DBE00F9B39A /* utils.c in Sources */,
-				6753277D1FDC6DBE00F9B39A /* shader.c in Sources */,
 				6753277E1FDC6DBE00F9B39A /* camera.c in Sources */,
 				6753277C1FDC6DBE00F9B39A /* draw.c in Sources */,
 				675327781FDC6DBE00F9B39A /* matrix.c in Sources */,
