@@ -18,6 +18,7 @@
  2) obj loader
  3) physics (gravity and collisions)
  4) lighting
+ 5) text rendering
  */
 
 /* global camera_t struct for handlers */
