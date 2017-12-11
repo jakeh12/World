@@ -9,6 +9,9 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
+#define WIDTH 800
+#define HEIGHT 600
+
 /*
  TODO:
  1) png texture loader
@@ -28,23 +31,43 @@ static void error_callback(int error, const char* description)
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+        int exclusive_control = glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+        if (exclusive_control) {
+            /* first escape press, release mouse */
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        } else {
+            /* second escape press, exit */
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+        }
     }
-    else if(key == GLFW_KEY_W && action == GLFW_PRESS) {
+    else if (key == GLFW_KEY_W && action == GLFW_PRESS) {
         camera_forward(cam);
     }
-    else if(key == GLFW_KEY_S && action == GLFW_PRESS) {
+    else if (key == GLFW_KEY_S && action == GLFW_PRESS) {
         camera_backward(cam);
     }
-    else if(key == GLFW_KEY_D && action == GLFW_PRESS) {
+    else if (key == GLFW_KEY_D && action == GLFW_PRESS) {
         camera_rightward(cam);
     }
-    else if(key == GLFW_KEY_A && action == GLFW_PRESS) {
+    else if (key == GLFW_KEY_A && action == GLFW_PRESS) {
         camera_leftward(cam);
     }
     /* DEBUGGING ONLY */
     printf("X: %f\tY: %f\tZ: %f\n", cam->x, cam->y, cam->z);
     /* DEBUGGING ONLY */
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        int exclusive_control = glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+        if (exclusive_control) {
+            /* handle regular left click */
+        }
+        else {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
+    }
 }
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -53,21 +76,30 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     float sensitivity = 0.2f;
     double dx = xpos - oldx;
     double dy = ypos - oldy;
-    cam->rx += deg_to_rad(dx * sensitivity);
-    cam->ry += -deg_to_rad(dy * sensitivity);
-    if (cam->rx < 0)
-        cam->rx += deg_to_rad(360.0f);
-    else if (cam->rx >= deg_to_rad(360.0f))
-        cam->rx -= deg_to_rad(360.0f);
-    if (cam->ry > deg_to_rad(90.0f))
-        cam->ry = deg_to_rad(90.0f);
-    else if (cam->ry < -deg_to_rad(90.0f))
-        cam->ry = -deg_to_rad(90.0f);
-    oldx = xpos;
-    oldy = ypos;
-    /* DEBUGGING ONLY */
-    printf("RX: %f\tRY: %f\n", rad_to_deg(cam->rx), rad_to_deg(cam->ry));
-    /* DEBUGGING ONLY */
+    
+    int exclusive_control = glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+    if (exclusive_control) {
+        /* handle regular movement */
+        cam->rx += deg_to_rad(dx * sensitivity);
+        cam->ry += -deg_to_rad(dy * sensitivity);
+        if (cam->rx < 0)
+            cam->rx += deg_to_rad(360.0f);
+        else if (cam->rx >= deg_to_rad(360.0f))
+            cam->rx -= deg_to_rad(360.0f);
+        if (cam->ry > deg_to_rad(90.0f))
+            cam->ry = deg_to_rad(90.0f);
+        else if (cam->ry < -deg_to_rad(90.0f))
+            cam->ry = -deg_to_rad(90.0f);
+        oldx = xpos;
+        oldy = ypos;
+        /* DEBUGGING ONLY */
+        printf("RX: %f\tRY: %f\n", rad_to_deg(cam->rx), rad_to_deg(cam->ry));
+        /* DEBUGGING ONLY */
+    }
+    else {
+        oldx = xpos;
+        oldy = ypos;
+    }
 }
 
 int main()
@@ -85,14 +117,15 @@ int main()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
-    window = glfwCreateWindow(800, 600, "World", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "World", NULL, NULL);
     if (!window) {
         fprintf(stderr, "ERROR: could not open window with GLFW3\n");
         glfwTerminate();
         return 1;
     }
     
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwMakeContextCurrent(window);
