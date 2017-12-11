@@ -9,7 +9,13 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
-#define DEBUGGING
+/*
+ TODO:
+ 1) png texture loader
+ 2) obj loader
+ 3) physics (gravity and collisions)
+ 4) lighting
+ */
 
 /* global camera_t struct for handlers */
 static camera_t* cam;
@@ -144,7 +150,7 @@ int main()
     }
     
     /* free all resources */
-    glBindVertexArray(0);
+    glBindVertexArray(0); // <-- TODO: is this a correct way to free vao?
     delete_buffer(vbo);
     glfwDestroyWindow(window);
     glfwTerminate();
