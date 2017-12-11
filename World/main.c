@@ -9,6 +9,8 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
+#define DEBUGGING
+
 /* global camera_t struct for handlers */
 static camera_t* cam;
 
@@ -34,8 +36,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     else if(key == GLFW_KEY_A && action == GLFW_PRESS) {
         camera_leftward(cam);
     }
-    
+    /* DEBUGGING ONLY */
     printf("X: %f\tY: %f\tZ: %f\n", cam->x, cam->y, cam->z);
+    /* DEBUGGING ONLY */
 }
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -56,8 +59,9 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
         cam->ry = -deg_to_rad(90.0f);
     oldx = xpos;
     oldy = ypos;
-    
+    /* DEBUGGING ONLY */
     printf("RX: %f\tRY: %f\n", rad_to_deg(cam->rx), rad_to_deg(cam->ry));
+    /* DEBUGGING ONLY */
 }
 
 int main()
@@ -116,7 +120,14 @@ int main()
     cam->rx = deg_to_rad(0.0f);
     cam->ry = deg_to_rad(0.0f);
     
+    double current_frame_time, last_frame_time = 0.0f, frame_dt;
+    
     while(!glfwWindowShouldClose(window)) {
+        
+        current_frame_time = glfwGetTime();
+        frame_dt = current_frame_time - last_frame_time;
+        last_frame_time = current_frame_time;
+        
         glUseProgram(program);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
