@@ -6,12 +6,9 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <math.h>
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdocumentation"
-
 #include <GLFW/glfw3.h>
-
 #pragma clang diagnostic pop
 
 #define deg_to_rad(deg) (deg * M_PI / 180.0)

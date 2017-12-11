@@ -5,13 +5,8 @@
 #include <stdlib.h>
 #include "utils.h"
 
-#ifdef USE_SSE_MULTIPLY
-#include <xmmintrin.h>
-#endif
-
-
 void mat_identity(float m[]);
-void mat_multiply(float c[], float a[], float b[]);
+void mat_multiply(float m[], float a[], float b[]);
 void mat_rotate(float m[], float x, float y, float z, float angle);
 void mat_translate(float m[], float x, float y, float z);
 void mat_scale(float m[], float x, float y, float z);
