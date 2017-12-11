@@ -14,7 +14,7 @@ void mat_frustum(float m[], float l, float r, float b, float t, float n, float f
 void mat_perspective(float m[], float fov, float aspect, float near, float far);
 void mat_orthogonal(float m[], float l, float r, float b, float t, float n, float f);
 void mat_look_at(float m[], float eye_x, float eye_y, float eye_z, float center_x, float center_y, float center_z, float up_x, float up_y, float up_z);
-void mat_print(float m[]);
 void set_matrix(float m[], float x, float y, float z, float rx, float ry);
+void mat_print(float m[]);
 
 #endif
