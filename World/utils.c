@@ -94,14 +94,12 @@ void load_texture(const char* path, GLubyte** data)
         fprintf(stderr, "fopen %s failed: %d %s\n", path, errno, strerror(errno));
         exit(1);
     }
-    
     png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if (!png_ptr) {
         fclose(file);
         fprintf(stderr, "png_create_read_struct failed: %d %s\n", errno, strerror(errno)); // TODO: does libpng produce errno?
         exit(1);
     }
-    
     info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         fclose(file);
@@ -109,12 +107,10 @@ void load_texture(const char* path, GLubyte** data)
         fprintf(stderr, "png_create_info_struct failed: %d %s\n", errno, strerror(errno)); // TODO: does libpng produce errno?
         exit(1);
     }
-    
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
         fclose(file);
     }
-    
     png_init_io(png_ptr, file);
     png_set_sig_bytes(png_ptr, sig_read);
     png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND, NULL);

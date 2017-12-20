@@ -43,7 +43,9 @@
 		675327801FDC6E2300F9B39A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		675327831FDC6ECA00F9B39A /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		676E751B1FE9EA3600770DDF /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../../../usr/local/Cellar/libpng/1.6.34/lib/libpng16.16.dylib; sourceTree = "<group>"; };
-		676E751E1FE9EC1600770DDF /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
+		67EC5BFD1FEA589900936AEC /* crate_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crate_normal.png; sourceTree = "<group>"; };
+		67EC5BFE1FEA589900936AEC /* crate_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crate_diffuse.png; sourceTree = "<group>"; };
+		67EC5BFF1FEA589900936AEC /* crate_bump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crate_bump.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,9 @@
 		676E751D1FE9EB1400770DDF /* textures */ = {
 			isa = PBXGroup;
 			children = (
-				676E751E1FE9EC1600770DDF /* smile.png */,
+				67EC5BFF1FEA589900936AEC /* crate_bump.png */,
+				67EC5BFE1FEA589900936AEC /* crate_diffuse.png */,
+				67EC5BFD1FEA589900936AEC /* crate_normal.png */,
 			);
 			path = textures;
 			sourceTree = "<group>";

@@ -12,7 +12,7 @@
 #define WIDTH 800
 #define HEIGHT 600
 
-#define TEXTURE_SIZE 32
+#define TEXTURE_SIZE 512
 
 /*
  TODO:
@@ -141,16 +141,18 @@ int main()
     /* load textures */
     GLuint texture;
     glGenTextures(1, &texture);
-    glActiveTexture(0);
+    //glActiveTexture(1);
     glBindTexture(GL_TEXTURE_2D, texture);
-    GLubyte* texture_data = malloc(sizeof(GLubyte) * TEXTURE_SIZE * TEXTURE_SIZE * 3);
-    load_texture("textures/smile.png", &texture_data);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_SIZE, TEXTURE_SIZE, 0, GL_RGB, GL_UNSIGNED_BYTE, texture_data);
+    GLubyte* texture_data = malloc(sizeof(GLubyte) * TEXTURE_SIZE * TEXTURE_SIZE * 4);
+    load_texture("textures/crate_diffuse.png", &texture_data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_SIZE, TEXTURE_SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glUniform1i(glGetUniformLocation(program, "texture_sampler"), 0);
+    //glBindTexture(GL_TEXTURE_2D, 0);
+
     
     /* create transformation matrix */
     static GLfloat mvp_matrix[16];
