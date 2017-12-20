@@ -13,6 +13,7 @@
 		6753277E1FDC6DBE00F9B39A /* camera.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327761FDC6DBE00F9B39A /* camera.c */; };
 		675327811FDC6E2300F9B39A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 675327801FDC6E2300F9B39A /* main.c */; };
 		675327841FDC6ECA00F9B39A /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 675327831FDC6ECA00F9B39A /* libglfw.3.2.dylib */; };
+		676E751C1FE9EA3700770DDF /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 676E751B1FE9EA3600770DDF /* libpng16.16.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		675327771FDC6DBE00F9B39A /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
 		675327801FDC6E2300F9B39A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		675327831FDC6ECA00F9B39A /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
+		676E751B1FE9EA3600770DDF /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../../../usr/local/Cellar/libpng/1.6.34/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		676E751E1FE9EC1600770DDF /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				676E751C1FE9EA3700770DDF /* libpng16.16.dylib in Frameworks */,
 				675327841FDC6ECA00F9B39A /* libglfw.3.2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +79,7 @@
 		6753274D1FDC6D8400F9B39A /* World */ = {
 			isa = PBXGroup;
 			children = (
+				676E751D1FE9EB1400770DDF /* textures */,
 				675327801FDC6E2300F9B39A /* main.c */,
 				6753277F1FDC6DD700F9B39A /* shaders */,
 				675327761FDC6DBE00F9B39A /* camera.c */,
@@ -101,9 +106,18 @@
 		675327821FDC6ECA00F9B39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				676E751B1FE9EA3600770DDF /* libpng16.16.dylib */,
 				675327831FDC6ECA00F9B39A /* libglfw.3.2.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		676E751D1FE9EB1400770DDF /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				676E751E1FE9EC1600770DDF /* smile.png */,
+			);
+			path = textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +301,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.2.1/lib,
 					/usr/local/Cellar/glew/2.1.0/lib,
+					/usr/local/Cellar/libpng/1.6.34/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -302,6 +317,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.2.1/lib,
 					/usr/local/Cellar/glew/2.1.0/lib,
+					/usr/local/Cellar/libpng/1.6.34/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

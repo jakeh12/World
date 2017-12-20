@@ -12,6 +12,8 @@
 #define WIDTH 800
 #define HEIGHT 600
 
+#define TEXTURE_SIZE 32
+
 /*
  TODO:
  1) png texture loader
@@ -136,6 +138,20 @@ int main()
     GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, "shaders/fshader.glsl");
     GLuint program = make_program(vertex_shader, fragment_shader);
     
+    /* load textures */
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glActiveTexture(0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    GLubyte* texture_data = malloc(sizeof(GLubyte) * TEXTURE_SIZE * TEXTURE_SIZE * 3);
+    load_texture("textures/smile.png", &texture_data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_SIZE, TEXTURE_SIZE, 0, GL_RGB, GL_UNSIGNED_BYTE, texture_data);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glUniform1i(glGetUniformLocation(program, "texture_sampler"), 0);
+    
     /* create transformation matrix */
     static GLfloat mvp_matrix[16];
     
@@ -143,6 +159,8 @@ int main()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     /* generate VAO */
     GLuint vao;

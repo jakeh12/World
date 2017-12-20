@@ -1,8 +1,10 @@
 #version 410 core
 
-in vec4 color;
-out vec4 out_color;
+in vec2 fragment_texture_position;
+out vec3 pixel_color;
+
+uniform sampler2D texture_sampler;
 
 void main() {
-    out_color = vec4(color);
+    pixel_color = texture(texture_sampler, fragment_texture_position).rgb;
 }
