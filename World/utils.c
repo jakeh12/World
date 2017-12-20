@@ -83,7 +83,7 @@ void delete_buffer(GLuint buffer)
     glDeleteBuffers(1, &buffer);
 }
 
-void load_texture(const char* path, GLubyte** data)
+void load_texture(const char* path)
 {
     png_structp png_ptr;
     png_infop info_ptr;
@@ -121,15 +121,15 @@ void load_texture(const char* path, GLubyte** data)
     
     png_size_t row_bytes = png_get_rowbytes(png_ptr, info_ptr);
     
-    printf("PNG ROW BYTES: %ld\n", row_bytes);
-    printf("PNG BIT DEPTH: %d\n", bit_depth);
-    printf("PNG WIDTH: %d\tHEIGHT: %d\n", width, height);
+    unsigned char* data = calloc(sizeof(unsigned char), row_bytes*height);
 
     png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
     int i;
     for (i = 0; i < height; i++) {
-        memcpy(*data + (row_bytes * (height-1-i)), row_pointers[i], row_bytes);
+        // invert the order of rows
+        memcpy(data + (row_bytes * (height-1-i)), row_pointers[i], row_bytes);
     }
     png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
     fclose(file);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 }

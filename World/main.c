@@ -12,15 +12,12 @@
 #define WIDTH 800
 #define HEIGHT 600
 
-#define TEXTURE_SIZE 512
-
 /*
  TODO:
- 1) png texture loader
- 2) obj loader
- 3) physics (gravity and collisions)
- 4) lighting
- 5) text rendering
+ 1) obj loader
+ 2) physics (gravity and collisions)
+ 3) lighting
+ 4) text rendering
  */
 
 /* global camera_t struct for handlers */
@@ -55,9 +52,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     else if (key == GLFW_KEY_A && action == GLFW_PRESS) {
         camera_leftward(cam);
     }
-    /* DEBUGGING ONLY */
-    printf("X: %f\tY: %f\tZ: %f\n", cam->x, cam->y, cam->z);
-    /* DEBUGGING ONLY */
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -95,9 +89,6 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
             cam->ry = -deg_to_rad(90.0f);
         oldx = xpos;
         oldy = ypos;
-        /* DEBUGGING ONLY */
-        printf("RX: %f\tRY: %f\n", rad_to_deg(cam->rx), rad_to_deg(cam->ry));
-        /* DEBUGGING ONLY */
     }
     else {
         oldx = xpos;
@@ -133,26 +124,19 @@ int main()
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwMakeContextCurrent(window);
     
-    /* create shaders */
-    GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, "shaders/vshader.glsl");
-    GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, "shaders/fshader.glsl");
-    GLuint program = make_program(vertex_shader, fragment_shader);
-    
     /* load textures */
     GLuint texture;
     glGenTextures(1, &texture);
-    //glActiveTexture(1);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    GLubyte* texture_data = malloc(sizeof(GLubyte) * TEXTURE_SIZE * TEXTURE_SIZE * 4);
-    load_texture("textures/crate_diffuse.png", &texture_data);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_SIZE, TEXTURE_SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture_data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glUniform1i(glGetUniformLocation(program, "texture_sampler"), 0);
-    //glBindTexture(GL_TEXTURE_2D, 0);
-
+    load_texture("textures/crate_diffuse.png");
+    
+    /* load shaders */
+    GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, "shaders/vshader.glsl");
+    GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, "shaders/fshader.glsl");
+    GLuint program = make_program(vertex_shader, fragment_shader);
     
     /* create transformation matrix */
     static GLfloat mvp_matrix[16];
@@ -161,8 +145,8 @@ int main()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     /* generate VAO */
     GLuint vao;
@@ -196,6 +180,7 @@ int main()
         for (i = 0; i < 10; i++) {
             set_matrix(mvp_matrix, cam->x + i*2.0f, cam->y + i*2.0f, cam->z + 10.0f, cam->rx, cam->ry);
             glUniformMatrix4fv(glGetUniformLocation(program, "mvp_matrix"), 1, GL_FALSE, mvp_matrix);
+            glUniform1i(glGetUniformLocation(program, "texture_sampler"), 0);
             draw_triangles(vbo, 36);
         }
         
